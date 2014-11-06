@@ -8,6 +8,14 @@
 *.war
 *.ear
 
+# Eclipse Files & Folders #
+.project
+.classpath
+/.settings/
+
+# personal testing files #
+/src/testing
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
