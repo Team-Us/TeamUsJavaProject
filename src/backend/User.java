@@ -3,31 +3,29 @@
  */
 package backend;
 
-import java.util.ArrayList;
-
 /**
  * @author prestonhaynes
  *
  */
-public class User
+public abstract class User
 {
 	private String firstName;
 	private String lastName;
 	private String userName;
 	private int idNumber;
-	private ArrayList<String> progress = new ArrayList<String>();
 	private String email;
 	private String password = "";
-	public final String passwordRegexString = "^"; //TODO Working Regex string for password
-
+	/** passwordRegexString allows alphanumberic and "! # $ * % ^ &"  characters.
+	 *  8-36 characters for password.
+	 *  Public so that it can be access from other classes.
+	 *  Final so it cannot be changed by other classes **/
+	public final String passwordRegexString = "^[a-zA-Z0-9!#$*%^&]{8,36}$"; 
+	
 
 	/**
 	 * @param firstName
 	 * @param lastName
 	 * @param userName
-	 * @param idNumber
-	 * @param email
-	 * @param password
 	 */
 	public User(String firstName, String lastName, String userName,
 			int idNumber, String email, String password)
@@ -37,7 +35,7 @@ public class User
 		this.userName = userName;
 		this.idNumber = idNumber;
 		this.email = email;
-		setPassword(password, "");
+		this.password = password;
 		
 	}
 
@@ -49,7 +47,7 @@ public class User
 		if(checkPassword(oldPassword)
 				&& newPassword.length() >= 6
 				&& newPassword.length() <= 24
-				)//&& !newPassword.matches(passwordRegexString))
+				&& !newPassword.matches(passwordRegexString))
 		{
 			this.password = newPassword;
 			return true;
@@ -95,14 +93,6 @@ public class User
 	}
 
 	/**
-	 * @return the progress
-	 */
-	public ArrayList<String> getProgress()
-	{
-		return progress;
-	}
-
-	/**
 	 * @return the email
 	 */
 	public String getEmail()
@@ -137,4 +127,14 @@ public class User
 			return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		// TODO Auto-generated method stub
+		return String.format("/d:/s /s", idNumber, firstName, lastName);
+	}
+	
 }
